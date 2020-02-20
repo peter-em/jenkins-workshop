@@ -15,7 +15,7 @@ public class SimpleBackendApplication {
 
         String productName = context.getEnvironment().getProperty("productName");
         salesforceConnector.getOrderItemPccByProductName(productName)
-                .doOnNext(orderItemPcc -> log.info(orderItemPcc.getId() + " : " + orderItemPcc.getProductName() + " -> " + orderItemPcc.getPcc()))
+                .doOnNext(orderItemPcc -> log.info("ORDER_ITEM_PCC: " + orderItemPcc.getId() + " -> " + orderItemPcc.getProductName() + " -> " + orderItemPcc.getPcc()))
                 .blockFirst();
 
         context.close();
