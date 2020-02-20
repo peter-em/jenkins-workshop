@@ -14,6 +14,8 @@ public class WebClientConfig {
 
     @Bean
     WebClient webClient() {
-        return WebClient.builder().build();
+        return WebClient.builder()
+                .baseUrl(salesforceProperties.getUrl())
+                .build();
     }
 }
