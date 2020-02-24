@@ -5,6 +5,17 @@ pipeline {
             args '-v /root/.m2:/root/.m2'
         }
     }
+    parameters {
+        choice(
+                name: 'PROFILE',
+                choices: ['local', 'dev', 'custom'],
+                description: 'Choose spring profile'
+        )
+        string(
+                name: 'PRODUCT_NAME',
+                description: 'Pass the product name'
+        )
+    }
     stages {
         stage('Test') {
             steps {
