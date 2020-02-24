@@ -16,6 +16,12 @@ pipeline {
                 description: 'Pass the product name'
         )
     }
+    environment {
+        DEV_USERNAME = credentials('sf-dev-username')
+        DEV_PASSWORD = credentials('sf-dev-password')
+        DEV_CLIENT_ID = credentials('sf-dev-client-id')
+        DEV_CLIENT_SECRET = credentials('sf-dev-client-secret')
+    }
     stages {
         stage('Test') {
             steps {
