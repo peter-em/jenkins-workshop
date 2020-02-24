@@ -35,8 +35,14 @@ pipeline {
                 }
             }
         }
-        stage('Run') {
+        stage('Run DEV') {
+            when {
+                expression {
+                    params.PROFILE == 'dev'
+                }
+            }
             steps {
+
                 dir('simple-backend/target') {
                     sh """java -jar app.jar \
                        --spring.profiles.active=$params.PROFILE \
