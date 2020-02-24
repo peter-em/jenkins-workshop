@@ -15,6 +15,26 @@ pipeline {
                 name: 'PRODUCT_NAME',
                 description: 'Pass the product name'
         )
+        string(
+                name: 'URL',
+                description: 'Pass the instance url - required only when profile is `custom`'
+        )
+        string(
+                name: 'USERNAME',
+                description: 'Pass the username - required only when profile is `custom`'
+        )
+        string(
+                name: 'PASSWORD',
+                description: 'Pass the password - required only when profile is `custom`'
+        )
+        string(
+                name: 'CLIENT_ID',
+                description: 'Pass the client id - required only when profile is `custom`'
+        )
+        string(
+                name: 'CLIENT_SECRET',
+                description: 'Pass the client secret - required only when profile is `custom`'
+        )
     }
     environment {
         DEV_USERNAME = credentials('sf-dev-username')
@@ -47,6 +67,27 @@ pipeline {
                     sh """java -jar app.jar \
                        --spring.profiles.active=$params.PROFILE \
                        --productName=$params.PRODUCT_NAME
+                    """
+                }
+            }
+        }
+        stage('Run CUSTOM') {
+            when {
+                expression {
+                    params.PROFILE == 'custom'
+                }
+            }
+            steps {
+
+                dir('simple-backend/target') {
+                    sh """java -jar app.jar \
+                       --spring.profiles.active=$params.PROFILE \
+                       --productName=$params.PRODUCT_NAME \
+                       --salesforce.url=$params.URL \
+                       --salesforce.username=$params.USERNAME \
+                       --salesforce.password=$params.PASSWORD \
+                       --salesforce.clientId=$params.CLIENT_ID \
+                       --salesforce.clientSecret=$params.CLIENT_SECRET \
                     """
                 }
             }
