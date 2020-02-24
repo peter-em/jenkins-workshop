@@ -5,6 +5,7 @@ productName: TicketExpress
 spring:
   profiles: dev
 server.port: 8080
+productName: Test
 salesforce:
   url: https://sabre--tncommdp3.cs8.my.salesforce.com/services
   username: ${DEV_USERNAME}
