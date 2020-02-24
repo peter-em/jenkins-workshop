@@ -1,10 +1,11 @@
-package com.slowiak.simplebackend;
+package com.slowiak.simplebackend.controller;
 
 import com.slowiak.simplebackend.config.SalesforceProperties;
 import com.slowiak.simplebackend.model.GetResponse;
 import com.slowiak.simplebackend.model.OrderItemPcc;
 import com.slowiak.simplebackend.model.Token;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -14,15 +15,19 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
+import static com.slowiak.simplebackend.config.Profiles.*;
+import static com.slowiak.simplebackend.config.Profiles.DEV;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.web.reactive.function.BodyInserters.fromMultipartData;
 
 @Component
+@Profile({CUSTOM, DEV})
 @RequiredArgsConstructor
-public class SalesforceConnector {
+public class SalesforceConnector implements Connector{
     private final WebClient webClient;
     private final SalesforceProperties salesforceProperties;
 
+    @Override
     public Flux<OrderItemPcc> getOrderItemPccByProductName(String productName) {
         var query = "SELECT+Id,Sabre_PCC_Text__c,Sabre_Product__c+FROM+ccSabre_OrderItem_PCC__c+WHERE+Sabre_Product__c='" + productName + "'";
         return getToken().flatMapMany(token ->
