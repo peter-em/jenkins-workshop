@@ -5,7 +5,7 @@ pipeline {
       steps {
         // we're gonna do something
         sh 'ls -l'
-        pwd
+        sh 'pwd'
       }
     }
   }
