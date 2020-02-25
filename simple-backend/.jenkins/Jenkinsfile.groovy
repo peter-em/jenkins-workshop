@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'DOCKER_IMAE_NAME'
+      image 'adoptopenjdk/maven-openjdk11'
     }
   }
   stages {
