@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'DOCKER_IMAE_NAME'
+    }
+  }
   stages {
     stage('FIRST STAGE') {
       steps {
