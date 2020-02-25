@@ -54,3 +54,10 @@ winpty docker exec -it myjenkins bash
 ```
 cat /var/jenkins_home/secrets/initialAdminPassword
 ```
+
+### Copy paste snippets
+
+Image name: `adoptopenjdk/maven-openjdk11`
+Docker hub: [link](https://hub.docker.com/r/adoptopenjdk/maven-openjdk11)
+
+Pipeline syntax docs: [link](https://jenkins.io/doc/book/pipeline/syntax/)
