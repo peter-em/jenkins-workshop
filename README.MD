@@ -46,7 +46,7 @@ docker run -u root --rm -d -p 8080:8080 -p 50000:50000 --name myjenkins -v jenki
 #### 3. Run container in interactive mode
 
 ```
-docker exec -it myjenkins bash
+winpty docker exec -it myjenkins bash
 ```
 
 #### 4. Copy Jenkins admin installation password (from interactive mode 6.)
