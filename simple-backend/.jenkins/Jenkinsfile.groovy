@@ -8,5 +8,12 @@ pipeline {
         sh 'pwd'
       }
     }
+    stage('Build') {
+      steps {
+        dir('simple-backend') {
+          sh 'mvn clean install'
+        }
+      }
+    }
   }
 }
