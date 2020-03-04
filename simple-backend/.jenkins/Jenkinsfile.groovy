@@ -5,6 +5,12 @@ pipeline {
             args '-v /root/.m2:/root/.m2'
         }
     }
+    environment {
+        PASSWORD = credentials('PASSWORD')
+        USERNAME = credentials('USERNAME')
+        CLIENT_SECRET = credentials('CLIENT_SECRET')
+        CLIENT_ID = credentials('CLIENT_ID')
+    }
     parameters {
         choice(
                 name: 'PROFILE',
@@ -21,6 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('simple-backend') {
+                    echo PASSWORD
                     sh 'mvn clean install'
                 }
             }
