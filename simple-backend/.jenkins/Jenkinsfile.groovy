@@ -2,12 +2,12 @@ pipeline {
     agent {
         docker {
             image 'adoptopenjdk/maven-openjdk11'
+            args '-v /root/.m2/root/.m2'
         }
     }
     stages {
         stage('FIRST STAGE') {
             steps {
-                // we're gonna do something
                 sh 'ls -l'
                 sh 'pwd'
             }
