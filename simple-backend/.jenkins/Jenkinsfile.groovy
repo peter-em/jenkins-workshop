@@ -57,6 +57,11 @@ pipeline {
             }
         }
         stage('Run app') {
+            when {
+                expression {
+                    PROFILE == 'dev'
+                }
+            }
             steps {
                 dir('simple-backend/target') {
                     sh """
