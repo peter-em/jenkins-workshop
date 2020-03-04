@@ -6,16 +6,17 @@ pipeline {
         }
     }
     stages {
-        stage('FIRST STAGE') {
-            steps {
-                sh 'ls -l'
-                sh 'pwd'
-            }
-        }
         stage('Build') {
             steps {
                 dir('simple-backend') {
                     sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Run app') {
+            steps {
+                dir('simple-backend/target') {
+                    sh 'java -jar app.jar'
                 }
             }
         }
