@@ -7,7 +7,7 @@ spring:
 server.port: 8080
 salesforce:
   url: https://sabre--tncommdp3.cs8.my.salesforce.com/services
-  username: ${DEV_USERNAME}
-  password: ${DEV_PASSWORD}
-  clientId: ${DEV_CLIENT_ID}
-  clientSecret: ${DEV_CLIENT_SECRET}
+  username: ${USERNAME}
+  password: ${PASSWORD}
+  clientId: ${CLIENT_ID}
+  clientSecret: ${CLIENT_SECRET}

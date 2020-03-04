@@ -14,7 +14,7 @@ pipeline {
     parameters {
         choice(
                 name: 'PROFILE',
-                choices: ['local', 'dev', 'other'],
+                choices: ['local', 'dev', 'custom'],
                 description: 'Pick something pls nigga'
         )
         string(
@@ -22,13 +22,37 @@ pipeline {
                 defaultValue: 'Pjoter',
                 description: 'WHY ARE YOU RUNNING?!'
         )
+        string(
+                name: 'SF_URL',
+                defaultValue: '',
+                description: 'Please provide valid url'
+        )
     }
     stages {
         stage('Build') {
             steps {
                 dir('simple-backend') {
-                    echo PASSWORD
                     sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    PROFILE == 'custom'
+                }
+            }
+            steps {
+                dir('simple-backend/target') {
+                    sh """
+                            java -jar app.jar --spring.profiles.active=$params.PROFILE \
+                                --productName=$params.PRODUCT_NAME \
+                                --salesforce.username=$USERNAME \
+                                --salesforce.password=$PASSWORD \
+                                --salesforce.clientId=$CLIENT_ID \
+                                --salesforce.clientSecret=$CLIENT_SECRET \
+                                --salesforce.url=$params.SF_URL
+                    """
                 }
             }
         }
